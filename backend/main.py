@@ -22,12 +22,9 @@ app = FastAPI(
 )
 
 # CORS configuration
-origins_env = os.getenv("ALLOWED_ORIGINS")
-
-if origins_env:
-    allowed_origins = [origin.strip() for origin in origins_env.split(",")]
-else:
-    allowed_origins = []
+allowed_origins = [
+    os.getenv("ALLOWED_ORIGINS", "https://hrms-lite-chi.vercel.app")
+]
 
 app.add_middleware(
     CORSMiddleware,
