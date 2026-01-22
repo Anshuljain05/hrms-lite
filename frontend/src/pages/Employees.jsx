@@ -8,8 +8,8 @@ export default function Employees() {
   const [message, setMessage] = useState(null)
   const [showForm, setShowForm] = useState(false)
   const [formData, setFormData] = useState({
-    employeeId: '',
-    fullName: '',
+    employee_id: '',
+    full_name: '',
     email: '',
     department: ''
   })
@@ -54,7 +54,7 @@ export default function Employees() {
       }
 
       setMessage({ type: 'success', text: 'Employee added successfully!' })
-      setFormData({ employeeId: '', fullName: '', email: '', department: '' })
+      setFormData({ employee_id: '', full_name: '', email: '', department: '' })
       setShowForm(false)
       fetchEmployees()
     } catch (error) {
@@ -107,9 +107,9 @@ export default function Employees() {
                 <label className="form-label">Employee ID</label>
                 <input
                   type="text"
-                  name="employeeId"
+                  name="employee_id"
                   className="form-input"
-                  value={formData.employeeId}
+                  value={formData.employee_id}
                   onChange={handleInputChange}
                   placeholder="e.g., EMP001"
                   required
@@ -119,9 +119,9 @@ export default function Employees() {
                 <label className="form-label">Full Name</label>
                 <input
                   type="text"
-                  name="fullName"
+                  name="full_name"
                   className="form-input"
-                  value={formData.fullName}
+                  value={formData.full_name}
                   onChange={handleInputChange}
                   placeholder="Enter full name"
                   required
@@ -186,16 +186,16 @@ export default function Employees() {
             </thead>
             <tbody>
               {employees.map(emp => (
-                <tr key={emp.employeeId}>
-                  <td><strong>{emp.employeeId}</strong></td>
-                  <td>{emp.fullName}</td>
+                <tr key={emp.employee_id}>
+                  <td><strong>{emp.employee_id}</strong></td>
+                  <td>{emp.full_name}</td>
                   <td>{emp.email}</td>
                   <td>{emp.department}</td>
                   <td>
                     <div className="action-buttons">
                       <button
                         className="btn-danger btn-small"
-                        onClick={() => handleDeleteEmployee(emp.employeeId)}
+                        onClick={() => handleDeleteEmployee(emp.employee_id)}
                         disabled={loading}
                       >
                         Delete

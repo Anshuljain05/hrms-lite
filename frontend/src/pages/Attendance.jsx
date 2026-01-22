@@ -9,7 +9,7 @@ export default function Attendance() {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState(null)
   const [formData, setFormData] = useState({
-    employeeId: '',
+    employee_id: '',
     date: new Date().toISOString().split('T')[0],
     status: 'Present'
   })
@@ -58,13 +58,13 @@ export default function Attendance() {
   const handleEmployeeChange = (e) => {
     const employeeId = e.target.value
     setSelectedEmployee(employeeId)
-    setFormData(prev => ({ ...prev, employeeId }))
+    setFormData(prev => ({ ...prev, employee_id: employeeId }))
   }
 
   const handleMarkAttendance = async (e) => {
     e.preventDefault()
 
-    if (!formData.employeeId) {
+    if (!formData.employee_id) {
       setMessage({ type: 'error', text: 'Please select an employee' })
       return
     }
@@ -75,7 +75,7 @@ export default function Attendance() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          employeeId: formData.employeeId,
+          employee_id: formData.employee_id,
           date: formData.date,
           status: formData.status
         })
@@ -88,7 +88,7 @@ export default function Attendance() {
 
       setMessage({ type: 'success', text: 'Attendance marked successfully!' })
       setFormData({
-        employeeId: selectedEmployee,
+        employee_id: selectedEmployee,
         date: new Date().toISOString().split('T')[0],
         status: 'Present'
       })
