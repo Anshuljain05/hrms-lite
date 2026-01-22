@@ -1,5 +1,5 @@
 from .employee import EmployeeCreate, EmployeeResponse, EmployeeList
-from .attendance import AttendanceCreate, AttendanceResponse, AttendanceList, StatusEnum
+from .attendance import AttendanceCreate, AttendanceResponse, AttendanceList
 
 __all__ = [
     "EmployeeCreate",
@@ -8,6 +8,5 @@ __all__ = [
     "AttendanceCreate",
     "AttendanceResponse",
     "AttendanceList",
-    "StatusEnum"
 ]
 
