@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Import models to register them
 import models
 from database import Base, engine
 from routes.employees import router as employee_router
@@ -19,6 +20,7 @@ app = FastAPI(
     version="1.0.0"
 )
 
+# CORS configuration
 allowed_origins = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 
 app.add_middleware(
@@ -42,15 +44,9 @@ def read_root():
 
 @app.get("/health")
 def health_check():
-    """Quick health check without database access"""
     return {"status": "healthy", "service": "hrms-lite"}
 
 if __name__ == "__main__":
     import uvicorn
     port = int(os.getenv("PORT", 8000))
-    uvicorn.run(
-        app,
-        host="0.0.0.0",
-        port=port,
-        workers=1  # Single worker for development
-    )
+    uvicorn.run(app, host="0.0.0.0", port=port)

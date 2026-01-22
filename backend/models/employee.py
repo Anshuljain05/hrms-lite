@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, UniqueConstraint
+from sqlalchemy import Column, Integer, String, DateTime, func
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -6,10 +6,12 @@ from database import Base
 class Employee(Base):
     __tablename__ = "employees"
 
-    employeeId = Column(String, primary_key=True, index=True, unique=True)
-    fullName = Column(String, nullable=False)
-    email = Column(String, nullable=False, unique=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
+    employee_id = Column(String, unique=True, index=True, nullable=False)
+    full_name = Column(String, nullable=False)
+    email = Column(String, unique=True, index=True, nullable=False)
     department = Column(String, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     # Relationship with attendance records - using string reference to avoid circular imports at import time
     attendance_records = relationship("Attendance", back_populates="employee", cascade="all, delete-orphan")

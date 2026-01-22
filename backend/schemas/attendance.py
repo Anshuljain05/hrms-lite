@@ -1,38 +1,37 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import List
 from datetime import date
-from enum import Enum
-
-
-class StatusEnum(str, Enum):
-    PRESENT = "Present"
-    ABSENT = "Absent"
 
 
 class AttendanceCreate(BaseModel):
-    employeeId: str
+    employee_id: str
     date: date
-    status: StatusEnum
+    status: str  # "Present" or "Absent"
 
     class Config:
         schema_extra = {
             "example": {
-                "employeeId": "EMP001",
+                "employee_id": "EMP001",
                 "date": "2026-01-22",
                 "status": "Present"
             }
         }
 
 
-class AttendanceResponse(AttendanceCreate):
-    id: str
+class Attendance(BaseModel):
+    id: int
+    employee_id: str
+    date: date
+    status: str
+
+    model_config = ConfigDict(from_attributes=True)
 
     class Config:
         orm_mode = True
         schema_extra = {
             "example": {
                 "id": "ATT001",
-                "employeeId": "EMP001",
+                "employee_id": "EMP001",
                 "date": "2026-01-22",
                 "status": "Present"
             }
@@ -40,7 +39,7 @@ class AttendanceResponse(AttendanceCreate):
 
 
 class AttendanceList(BaseModel):
-    records: List[AttendanceResponse]
+    records: List[Attendance]
     total: int
 
     class Config:
@@ -49,7 +48,7 @@ class AttendanceList(BaseModel):
                 "records": [
                     {
                         "id": "ATT001",
-                        "employeeId": "EMP001",
+                        "employee_id": "EMP001",
                         "date": "2026-01-22",
                         "status": "Present"
                     }
