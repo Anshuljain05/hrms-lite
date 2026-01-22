@@ -17,9 +17,6 @@ from database import Base, engine
 from routes.employees import router as employee_router
 from routes.attendance import router as attendance_router
 
-# Create tables
-Base.metadata.create_all(bind=engine)
-
 app = FastAPI(
     title="HRMS Lite API",
     description="A lightweight HR Management System API",
@@ -41,6 +38,9 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
+
+# Create tables
+Base.metadata.create_all(bind=engine)
 
 # Global exception handler
 @app.exception_handler(Exception)
