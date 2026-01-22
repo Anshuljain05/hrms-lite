@@ -32,7 +32,7 @@ def create_employee(employee: EmployeeCreate, db: Session = Depends(get_db)):
             )
 
     try:
-        db_employee = Employee(**employee.dict())
+        db_employee = Employee(**employee.model_dump())
         db.add(db_employee)
         db.commit()
         db.refresh(db_employee)

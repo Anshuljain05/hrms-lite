@@ -8,14 +8,15 @@ class AttendanceCreate(BaseModel):
     date: date
     status: str  # "Present" or "Absent"
 
-    class Config:
-        schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "employee_id": "EMP001",
                 "date": "2026-01-22",
                 "status": "Present"
             }
         }
+    )
 
 
 class Attendance(BaseModel):
@@ -24,11 +25,9 @@ class Attendance(BaseModel):
     date: date
     status: str
 
-    model_config = ConfigDict(from_attributes=True)
-
-    class Config:
-        orm_mode = True
-        schema_extra = {
+    model_config = ConfigDict(
+        from_attributes=True,
+        json_schema_extra={
             "example": {
                 "id": 1,
                 "employee_id": "EMP001",
@@ -36,6 +35,7 @@ class Attendance(BaseModel):
                 "status": "Present"
             }
         }
+    )
 
 
 class AttendanceResponse(BaseModel):
@@ -44,11 +44,9 @@ class AttendanceResponse(BaseModel):
     date: date
     status: str
 
-    model_config = ConfigDict(from_attributes=True)
-
-    class Config:
-        orm_mode = True
-        schema_extra = {
+    model_config = ConfigDict(
+        from_attributes=True,
+        json_schema_extra={
             "example": {
                 "id": 1,
                 "employee_id": "EMP001",
@@ -56,14 +54,15 @@ class AttendanceResponse(BaseModel):
                 "status": "Present"
             }
         }
+    )
 
 
 class AttendanceList(BaseModel):
     records: List[AttendanceResponse]
     total: int
 
-    class Config:
-        schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "records": [
                     {
@@ -76,3 +75,4 @@ class AttendanceList(BaseModel):
                 "total": 1
             }
         }
+    )

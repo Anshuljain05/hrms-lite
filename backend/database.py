@@ -19,10 +19,10 @@ if "sqlite" in DATABASE_URL:
     pool_settings = {"connect_args": connect_args}
 else:
     pool_settings = {
-        "pool_size": 5,
-        "max_overflow": 10,
+        "pool_size": 3,          # Reduced from 5
+        "max_overflow": 5,       # Reduced from 10
         "pool_pre_ping": True,
-        "pool_recycle": 3600
+        "pool_recycle": 600      # Reduced from 3600 (10 mins)
     }
 
 engine = create_engine(

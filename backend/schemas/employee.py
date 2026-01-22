@@ -8,8 +8,8 @@ class EmployeeCreate(BaseModel):
     email: EmailStr
     department: str
 
-    class Config:
-        schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "employee_id": "EMP001",
                 "full_name": "John Doe",
@@ -17,6 +17,7 @@ class EmployeeCreate(BaseModel):
                 "department": "Engineering"
             }
         }
+    )
 
 
 class EmployeeUpdate(BaseModel):
@@ -42,11 +43,9 @@ class EmployeeResponse(BaseModel):
     email: str
     department: str
 
-    model_config = ConfigDict(from_attributes=True)
-
-    class Config:
-        orm_mode = True
-        schema_extra = {
+    model_config = ConfigDict(
+        from_attributes=True,
+        json_schema_extra={
             "example": {
                 "id": 1,
                 "employee_id": "EMP001",
@@ -55,17 +54,19 @@ class EmployeeResponse(BaseModel):
                 "department": "Engineering"
             }
         }
+    )
 
 
 class EmployeeList(BaseModel):
     employees: List[EmployeeResponse]
     total: int
 
-    class Config:
-        schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "employees": [
                     {
+                        "id": 1,
                         "employee_id": "EMP001",
                         "full_name": "John Doe",
                         "email": "john@example.com",
@@ -75,3 +76,4 @@ class EmployeeList(BaseModel):
                 "total": 1
             }
         }
+    )

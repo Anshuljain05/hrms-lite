@@ -11,6 +11,7 @@ class Attendance(Base):
     date = Column(Date, nullable=False)
     status = Column(String, nullable=False)  # "Present" or "Absent"
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    employee = relationship("Employee", back_populates="attendance_records")
 
     def __repr__(self):
-        return f"<Attendance(employeeId={self.employeeId}, date={self.date}, status={self.status})>"
+        return f"<Attendance(employee_id={self.employee_id}, date={self.date}, status={self.status})>"

@@ -17,4 +17,4 @@ class Employee(Base):
     attendance_records = relationship("Attendance", back_populates="employee", cascade="all, delete-orphan")
 
     def __repr__(self):
-        return f"<Employee(employeeId={self.employeeId}, fullName={self.fullName})>"
+        return f"<Employee(employee_id={self.employee_id}, full_name={self.full_name})>"

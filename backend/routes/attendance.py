@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from datetime import date
-from uuid import uuid4
 from database import get_db
 from models.employee import Employee
 from models.attendance import Attendance
