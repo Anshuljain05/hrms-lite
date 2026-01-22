@@ -1,0 +1,160 @@
+HRMS Lite - Project Structure
+=============================
+
+Ethara AI/
+│
+├── 📄 README.md                          ⭐ Main project guide
+├── 📄 INSTALLATION.md                    ⭐ Setup instructions  
+├── 📄 IMPLEMENTATION_SUMMARY.md           ⭐ Completion details
+├── 📄 .gitignore                         Git ignore rules
+├── 📄 PROJECT_STRUCTURE.txt              This file
+│
+├── 📁 backend/
+│   ├── 📄 main.py                       ⭐ FastAPI entry point
+│   ├── 📄 database.py                   SQLAlchemy config
+│   ├── 📄 requirements.txt               Python dependencies
+│   ├── 📄 README.md                     Backend guide
+│   ├── 📄 setup.bat                     Windows setup script
+│   ├── 📄 setup.sh                      Mac/Linux setup script
+│   ├── 📄 hrms.db                       SQLite database (auto-created)
+│   │
+│   ├── 📁 models/
+│   │   ├── 📄 __init__.py              Package init
+│   │   ├── 📄 employee.py              Employee model
+│   │   └── 📄 attendance.py            Attendance model
+│   │
+│   ├── 📁 schemas/
+│   │   ├── 📄 __init__.py              Package init
+│   │   ├── 📄 employee.py              Employee validation
+│   │   └── 📄 attendance.py            Attendance validation
+│   │
+│   └── 📁 routes/
+│       ├── 📄 __init__.py              Package init
+│       ├── 📄 employees.py             Employee endpoints
+│       └── 📄 attendance.py            Attendance endpoints
+│
+├── 📁 frontend/
+│   ├── 📄 package.json                 ⭐ npm dependencies
+│   ├── 📄 vite.config.js               Vite config
+│   ├── 📄 index.html                   HTML entry point
+│   ├── 📄 .env                         Environment variables
+│   ├── 📄 .gitignore                   Git ignore rules
+│   ├── 📄 README.md                    Frontend guide
+│   ├── 📄 setup.bat                    Windows setup script
+│   ├── 📄 setup.sh                     Mac/Linux setup script
+│   │
+│   └── 📁 src/
+│       ├── 📄 main.jsx                 React entry point
+│       ├── 📄 App.jsx                  ⭐ Main app component
+│       ├── 📄 App.css                  Global styles
+│       │
+│       ├── 📁 pages/
+│       │   ├── 📄 Employees.jsx        Employee management page
+│       │   └── 📄 Attendance.jsx        Attendance tracking page
+│       │
+│       └── 📁 components/
+│           └── (Future reusable components)
+
+Legend:
+⭐ = Key/Important files
+📄 = File
+📁 = Directory
+
+Total Structure:
+- 2 main directories (backend, frontend)
+- 9 Python files
+- 3 React component files
+- 5 Documentation files
+- 4 Setup scripts
+- 2 Config files per language
+- 1 SQLite database
+
+
+Key Files Overview:
+
+Backend (Python/FastAPI):
+  - main.py              → Application initialization and routing
+  - database.py          → Database connection and configuration
+  - models/*.py          → SQLAlchemy ORM definitions
+  - schemas/*.py         → Pydantic validation models
+  - routes/*.py          → API endpoint handlers
+
+Frontend (React/Vite):
+  - App.jsx              → Main app with navigation
+  - App.css              → All styling (300+ lines)
+  - pages/Employees.jsx  → Employee management features
+  - pages/Attendance.jsx → Attendance tracking features
+  - main.jsx             → React DOM rendering
+
+
+API Endpoints Summary:
+
+Employees:
+  POST   /api/employees/
+  GET    /api/employees/
+  GET    /api/employees/{id}
+  DELETE /api/employees/{id}
+
+Attendance:
+  POST   /api/attendance/
+  GET    /api/attendance/
+  GET    /api/attendance/employee/{id}
+
+Health:
+  GET    /health
+  GET    /
+
+
+Database Tables:
+
+employees
+  - employeeId (PK, UNIQUE)
+  - fullName
+  - email (UNIQUE)
+  - department
+
+attendance
+  - id (PK)
+  - employeeId (FK)
+  - date
+  - status
+  - UNIQUE(employeeId, date)
+
+
+Quick Start:
+
+Backend:
+  cd backend
+  python -m venv venv
+  venv\Scripts\activate  (Windows) or source venv/bin/activate (Mac/Linux)
+  pip install -r requirements.txt
+  python -m uvicorn main:app --host 0.0.0.0 --port 8000
+
+Frontend (new terminal):
+  cd frontend
+  npm install
+  npm run dev
+
+Visit: http://localhost:5173
+
+
+Documentation Files:
+
+README.md                    → 400+ lines, complete guide
+INSTALLATION.md             → Detailed setup with troubleshooting
+backend/README.md           → Backend-specific documentation
+frontend/README.md          → Frontend-specific documentation
+IMPLEMENTATION_SUMMARY.md   → Completion checklist and summary
+
+
+Deployment Ready:
+
+✅ Backend - Ready for production with Gunicorn/Uvicorn
+✅ Frontend - Ready for build and static hosting
+✅ Database - SQLite for dev, PostgreSQL ready for prod
+✅ Documentation - Complete for deployment
+
+
+For Setup Instructions: See INSTALLATION.md
+For API Documentation: See README.md or http://localhost:8000/docs
+For Project Details: See IMPLEMENTATION_SUMMARY.md
