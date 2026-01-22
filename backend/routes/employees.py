@@ -16,14 +16,14 @@ def create_employee(employee: EmployeeCreate, db: Session = Depends(get_db)):
     """
     # Check if employee already exists
     existing_employee = db.query(Employee).filter(
-        (Employee.employeeId == employee.employeeId) | (Employee.email == employee.email)
+        (Employee.employee_id == employee.employee_id) | (Employee.email == employee.email)
     ).first()
 
     if existing_employee:
-        if existing_employee.employeeId == employee.employeeId:
+        if existing_employee.employee_id == employee.employee_id:
             raise HTTPException(
                 status_code=status.HTTP_409_CONFLICT,
-                detail=f"Employee ID '{employee.employeeId}' already exists"
+                detail=f"Employee ID '{employee.employee_id}' already exists"
             )
         else:
             raise HTTPException(
@@ -63,7 +63,7 @@ def get_employee(employee_id: str, db: Session = Depends(get_db)):
     Retrieve a specific employee by ID.
     Returns 404 if not found.
     """
-    employee = db.query(Employee).filter(Employee.employeeId == employee_id).first()
+    employee = db.query(Employee).filter(Employee.employee_id == employee_id).first()
     if not employee:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -78,7 +78,7 @@ def delete_employee(employee_id: str, db: Session = Depends(get_db)):
     Delete an employee by ID.
     Returns 404 if not found, 204 on success.
     """
-    employee = db.query(Employee).filter(Employee.employeeId == employee_id).first()
+    employee = db.query(Employee).filter(Employee.employee_id == employee_id).first()
     if not employee:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

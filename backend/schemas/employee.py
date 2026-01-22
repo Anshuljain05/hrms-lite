@@ -35,11 +35,20 @@ class Employee(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
-class EmployeeResponse(EmployeeCreate):
+class EmployeeResponse(BaseModel):
+    id: int
+    employee_id: str
+    full_name: str
+    email: str
+    department: str
+
+    model_config = ConfigDict(from_attributes=True)
+
     class Config:
         orm_mode = True
         schema_extra = {
             "example": {
+                "id": 1,
                 "employee_id": "EMP001",
                 "full_name": "John Doe",
                 "email": "john@example.com",

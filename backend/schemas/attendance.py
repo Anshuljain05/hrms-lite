@@ -30,7 +30,27 @@ class Attendance(BaseModel):
         orm_mode = True
         schema_extra = {
             "example": {
-                "id": "ATT001",
+                "id": 1,
+                "employee_id": "EMP001",
+                "date": "2026-01-22",
+                "status": "Present"
+            }
+        }
+
+
+class AttendanceResponse(BaseModel):
+    id: int
+    employee_id: str
+    date: date
+    status: str
+
+    model_config = ConfigDict(from_attributes=True)
+
+    class Config:
+        orm_mode = True
+        schema_extra = {
+            "example": {
+                "id": 1,
                 "employee_id": "EMP001",
                 "date": "2026-01-22",
                 "status": "Present"
@@ -39,7 +59,7 @@ class Attendance(BaseModel):
 
 
 class AttendanceList(BaseModel):
-    records: List[Attendance]
+    records: List[AttendanceResponse]
     total: int
 
     class Config:
@@ -47,7 +67,7 @@ class AttendanceList(BaseModel):
             "example": {
                 "records": [
                     {
-                        "id": "ATT001",
+                        "id": 1,
                         "employee_id": "EMP001",
                         "date": "2026-01-22",
                         "status": "Present"
